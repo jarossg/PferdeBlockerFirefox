@@ -6,19 +6,19 @@ window.onload = function() {
 
     var checkbox = document.querySelector("#statusCheckbox");
 
-    chrome.storage.local.get('active', function(result){
+    browser.storage.local.get('active', function(result){
         checkbox.checked = result.active;
       });
 
-    chrome.tabs.query({
+    browser.tabs.query({
       active: true,
       currentWindow: true
     }, tabs => {
-      chrome.tabs.sendMessage(tabs[0].id, {from:"popup"},setBlocked);
+      browser.tabs.sendMessage(tabs[0].id, {from:"popup"},setBlocked);
     });
 
   
     checkbox.onchange = function() {
-        chrome.storage.local.set({active: checkbox.checked});
+        browser.storage.local.set({active: checkbox.checked});
     };
 };
